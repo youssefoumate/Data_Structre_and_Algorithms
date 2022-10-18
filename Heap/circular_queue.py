@@ -35,7 +35,7 @@ class Queue:
             head = self.storage[self.first]
             self.last = self.first
             self.first += 1
-            if self.first > self.N:
+            if self.first == self.N:
                 self.first = 0
             self.N -= 1
             return head
@@ -67,6 +67,50 @@ if __name__ == "__main__":
     print(queue.dequeue())
     queue.enqueue(4)
     print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(3)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(15)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(18)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(17)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(9)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(4)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(3)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(4)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(3)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(15)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(18)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(17)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(9)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(4)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(3)
     print(queue.storage)
 
 
