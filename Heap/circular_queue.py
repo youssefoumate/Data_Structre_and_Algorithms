@@ -20,21 +20,27 @@ class Queue:
         return self.N == self.size
     def enqueue(self, item):
         """If not full, enqueue item in O(1) performance."""
-        if self.N == 0:
-            self.first = self.N
-            self.last = self.N
-            self.storage[self.N] = item
-        elif self.N < 16:
-            self.storage[self.N] = item
+        if not self.is_full():
+            if self.last > self.N:
+                self.last = 0
+            self.storage[self.last] = item
+            self.last = self.N+1
         else:
-            raise RuntimeError("queue full")
+            raise RuntimeError("Queue full")
         self.N += 1
 
     def dequeue(self):
         """If not empty, dequeue head in O(1) performance."""
-        head = self.storage[self.first] 
-        if not self.first > self.size:
+        if not self.is_empty():
+            head = self.storage[self.first]
+            self.last = self.first
             self.first += 1
+            if self.first > self.N:
+                self.first = 0
+            self.N -= 1
+            return head
+        else:
+            raise RuntimeError("Queue empty")
         
 
 
@@ -46,6 +52,23 @@ if __name__ == "__main__":
     queue.enqueue(23)
     queue.enqueue(1)
     print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(15)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(18)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(17)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(9)
+    print(queue.storage)
+    print(queue.dequeue())
+    queue.enqueue(4)
+    print(queue.storage)
+    print(queue.storage)
+
 
 
 
