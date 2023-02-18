@@ -1,29 +1,37 @@
-class Node:
-    def __init__(self, data=None, left=None, right=None):
-        self.data = data	# data field
-        self.left = left	# pointer to the left child
-        self.right = right	# pointer to the right child
+class Tree():
 
-traversed_nodes = [] 
-list_proc = [] 
-def traverse_tree(root):
-    if root is not None:
-        traversed_nodes.append(root)
-        traverse_tree(root.left)
-    elif len(traversed_nodes):
-        t_node = traversed_nodes.pop()
-        list_proc.append(t_node.data)
-        traverse_tree(t_node.right)
+    def __init__(self):
+        self.traversed_nodes = [] 
+        self.list_proc = [] 
+        self.root = None
+        self.init_tree()
 
-root = Node(1)
-root.left = Node(2)
-root.left.left = Node(4)
-root.right = Node(3)
-root.right.left = Node(5)
-root.right.left.left = Node(7)
-root.right.left.right = Node(8)
-root.right.right = Node(6)
+    class Node:
+        def __init__(self, data=None, left=None, right=None):
+            self.data = data	# data field
+            self.left = left	# pointer to the left child
+            self.right = right	# pointer to the right child
 
-traverse_tree(root)
-print(list_proc)
+    def init_tree(self):
+        self.root = self.Node(1)
+        self.root.left = self.Node(2)
+        self.root.left.left = self.Node(4)
+        self.root.right = self.Node(3)
+        self.root.right.left = self.Node(5)
+        self.root.right.left.left = self.Node(7)
+        self.root.right.left.right = self.Node(8)
+        self.root.right.right = self.Node(6)
+
+    def inorder_traverse_tree(self, root):
+        if root is not None:
+            self.traversed_nodes.append(root)
+            self.inorder_traverse_tree(root.left)
+        elif self.traversed_nodes:
+            t_node = self.traversed_nodes.pop()
+            self.list_proc.append(t_node.data)
+            self.inorder_traverse_tree(t_node.right)
+
+tree = Tree()
+tree.inorder_traverse_tree(tree.root)
+print(tree.list_proc)
 
