@@ -22,16 +22,16 @@ class Tree():
         self.root.right.left.right = self.Node(8)
         self.root.right.right = self.Node(6)
 
-    def inorder_traverse_tree(self, root):
+    def inorder_tree_traversal(self, root):
         if root is not None:
             self.traversed_nodes.append(root)
-            self.inorder_traverse_tree(root.left)
+            self.inorder_tree_traversal(root.left)
         elif self.traversed_nodes:
             t_node = self.traversed_nodes.pop()
             self.list_proc.append(t_node.data)
-            self.inorder_traverse_tree(t_node.right)
+            self.inorder_tree_traversal(t_node.right)
 
 tree = Tree()
-tree.inorder_traverse_tree(tree.root)
+tree.inorder_tree_traversal(tree.root)
 print(tree.list_proc)
 
