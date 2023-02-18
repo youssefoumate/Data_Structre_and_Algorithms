@@ -7,7 +7,7 @@ class Queue:
         """initializa queue
 
         Args:
-            size (int): _description_
+            size (int): size of queue 
         """
         self.size = size
         self.storage = [None] * size
@@ -24,10 +24,10 @@ class Queue:
             if self.last > self.N:
                 self.last = 0
             self.storage[self.last] = item
-            self.last = self.N+1
+            self.last = self.N+1 
+            self.N += 1
         else:
             raise RuntimeError("Queue full")
-        self.N += 1
 
     def dequeue(self):
         """If not empty, dequeue head in O(1) performance."""
@@ -41,6 +41,25 @@ class Queue:
             return head
         else:
             raise RuntimeError("Queue empty")
+
+    def enqueue_v2(self, item):
+        """Enqueue new item to end of queue."""
+        if self.is_full():
+            raise RuntimeError('Queue is full')
+
+        self.storage[self.last] = item
+        self.N += 1
+        self.last = (self.last + 1) % self.size
+
+    def dequeue_v2(self):
+        """Remove and return first item from queue."""
+        if self.is_empty():
+            raise RuntimeError('Queue is empty')
+
+        val = self.storage[self.first]
+        self.N -= 1
+        self.first = (self.first + 1) % self.size
+        return val
         
 
 
