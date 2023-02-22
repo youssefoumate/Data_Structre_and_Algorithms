@@ -29,6 +29,20 @@ class Tree():
         self.list_proc.append(root.data)
         self.inorder_tree_traversal(root.right)
 
+    def preorder_tree_traversal(self, root):
+        if root is None:
+            return
+        self.list_proc.append(root.data)
+        self.preorder_tree_traversal(root.left)
+        self.preorder_tree_traversal(root.right)
+
+    def postorder_tree_traversal(self, root):
+        if root is None:
+            return
+        self.postorder_tree_traversal(root.left)
+        self.postorder_tree_traversal(root.right)
+        self.list_proc.append(root.data)
+
 tree = Tree()
-tree.inorder_tree_traversal(tree.root)
+tree.postorder_tree_traversal(tree.root)
 print(tree.list_proc)
