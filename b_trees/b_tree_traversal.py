@@ -3,6 +3,8 @@ class Tree():
     def __init__(self):
         self.traversed_nodes = [] 
         self.list_proc = [] 
+        self.temp = []
+        self.bottom_view = []
 
     class Node:
         def __init__(self, data=None, left=None, right=None):
@@ -50,9 +52,25 @@ class Tree():
             return False
         self.cmp_trees(root1.right, root2.right)
         return True
+    
+    def naive_tree_bottom_view(self, root):
+        # traverse the tree (inorder)
+        # a hidden node has a right.left child or left.right child
+        if root is None:
+            return
+        self.naive_tree_bottom_view(root.left)
+        self.list_proc.append(root.data)
+        if root.left is not None:
+            if root.right is not None:
+                self.temp.append(root.data)
+        self.naive_tree_bottom_view(root.right)
+        self.bottom_view = [n for n in self.list_proc if n not in self.temp]
+        
+        
 
 tree = Tree()
-root1 = tree.init_tree(5)
+root1 = tree.init_tree(1)
 root2 = tree.init_tree(7)
-print(tree.cmp_trees(root1, root2))
-#print(tree.list_proc)
+#print(tree.cmp_trees(root1, root2))
+tree.naive_tree_bottom_view(root1)
+print(tree.bottom_view)
