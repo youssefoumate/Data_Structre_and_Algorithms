@@ -5,7 +5,6 @@ class Tree():
         self.list_proc = [] 
         self.temp = []
         self.bottom_view = []
-
     class Node:
         def __init__(self, data=None, left=None, right=None):
             self.data = data	# data field
@@ -66,11 +65,23 @@ class Tree():
         self.naive_tree_bottom_view(root.right)
         self.bottom_view = [n for n in self.list_proc if n not in self.temp]
         
-        
+    def tree_bottom_view(self, root):
+        d = {}
+        def bottom_view(root, dist, level, d):
+            if root is None:
+                return
+            if dist not in d or level >= d[dist][1]:
+                d[dist] = (root.data, level)
+            bottom_view(root.left, dist - 1, level + 1, d)
+            bottom_view(root.right, dist + 1, level + 1, d)
+
+        bottom_view(root, 0, 0, d)
+        for key in sorted(d):
+            self.bottom_view.append(d[key][0])
 
 tree = Tree()
 root1 = tree.init_tree(1)
 root2 = tree.init_tree(7)
 #print(tree.cmp_trees(root1, root2))
-tree.naive_tree_bottom_view(root1)
+tree.tree_bottom_view(root1)
 print(tree.bottom_view)
